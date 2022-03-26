@@ -1,21 +1,19 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import { Card, Container, ListGroup } from 'react-bootstrap';
 import Menu from './Components/Menu';
 import Principalmg from './Components/Principalmg';
 
 function App() {
   return (
-    <div>
-
+    <div className='bg-dark'>
       <Menu/>
 
-      <Container>
-        <h1>Ola mundo</h1>
-
-        <Principalmg></Principalmg>
-      </Container>
-      
+      <Container className='bg-dark'>
+        <br/>
+        <Principalmg/>
+        
+        </Container>      
     </div>
   );
 }
