@@ -8,7 +8,7 @@ const FilmesDetalhes = () => {
   const params = useParams()
 
   const [filme, setFilme] = useState({})
-  const [ator, setAtor] = useState({})
+  const [atores, setAtores] = useState([])
 
   useEffect(() => {
     apiFilmes.get('movie/' + params.id + '?language=pt-BR').then(resultado => {
@@ -16,7 +16,7 @@ const FilmesDetalhes = () => {
     })
 
     apiFilmes.get('movie/' + params.id + '/credits?language=pt-BR').then(resultado => {
-      setAtor(resultado.data.cast)
+      setAtores(resultado.data.cast)
     })
   }, [])
 
@@ -33,7 +33,7 @@ const FilmesDetalhes = () => {
           <Row>
             <Col md={4}>
               <Card>
-                <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
+                <Card.Img title={filme.title} variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
               </Card>
             </Col>
             <Col md={8}>
@@ -55,10 +55,22 @@ const FilmesDetalhes = () => {
           <h1>Atores</h1>
           <br />
           <Row>
-            
+            {atores.map(item => (
+
+              <Col key={item.id} md={2} className='mb-3'>
+
+                <Card >
+                  <Card.Img title={item.name} variant="top" src={"https://image.tmdb.org/t/p/w500/" + item.profile_path} />
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <br />
+                    <Link className="btn btn-danger" to={"/atores/" + item.id}>Ver mais</Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))
+            }
           </Row>
-
-
         </div>
       }
     </div>
